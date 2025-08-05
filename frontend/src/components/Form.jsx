@@ -1,102 +1,193 @@
 import React, { useRef, useState } from "react";
 import { LuUpload } from "react-icons/lu";
+import { GoOrganization } from "react-icons/go";
+import { IoPersonOutline, IoDocumentTextOutline } from "react-icons/io5";
+import { PiSuitcaseBold } from "react-icons/pi";
+import { MdOutlineListAlt } from "react-icons/md";
+import { CiLocationArrow1 } from "react-icons/ci";
 
 const Form = () => {
-  const fileInputRef= useRef(null)
-  const [selectedFile,setSelectedFile] = useState(null)
-  const [formData,setFormData] =useState({
-    orgName:'',
-    yourName:'',
-    role:'',
-    requirements:'',
-    jobDescription:'',
-    aboutOrg:''
+  const fileInputRef = useRef(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [formData, setFormData] = useState({
+    orgName: "",
+    yourName: "",
+    role: "",
+    requirements: "",
+    jobDescription: "",
+    aboutOrg: "",
+  });
 
-  })
-   
- const FileSelectClick=()=>{
-     fileInputRef.current.click()
- }
-const handleFileSelect=(e)=>{
-  const file = e.target.files[0]
-  console.log(file)
-  setSelectedFile(file)
+  const FileSelectClick = () => fileInputRef.current.click();
 
-}
-const handleFormSubmit=(e)=>{
-  e.preventDefault()
-     console.log(formData)
-     setFormData({
-       orgName:'',
-    yourName:'',
-    role:'',
-    requirements:'',
-    jobDescription:'',
-    aboutOrg:''
-     })
-    setSelectedFile('')
-}
-  
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((data) => ({ ...data, [name]: value }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData, selectedFile);
+    setFormData({
+      orgName: "",
+      yourName: "",
+      role: "",
+      requirements: "",
+      jobDescription: "",
+      aboutOrg: "",
+    });
+    setSelectedFile(null);
+  };
+
   return (
-    <form  onSubmit={handleFormSubmit} className=" border rounded-xl bg-white  w-[70vw]   justify-between md:gap-8 flex p-5 md:p-10">
-    
-      <div className="  p-4 w-full text-lg text-slate-700 font-semibold gap-2 flex flex-col">
-        <p>Organization name</p>
-        <input
-          type="text"
-          value={formData.orgName}
-          onChange={(e)=>setFormData(data=>({...data,orgName:e.target.value}))}
-          placeholder="Enter Organization name"
-          className="roundex-xl pl-4 w-full text-sm font-normal py-2 flex  outline-none border border-slate-200"
-        />
-        <p>Your name</p>
-        <input
-          type="text"
-           value={formData.yourName}
-          onChange={(e)=>setFormData(data=>({...data,yourName:e.target.value}))}
-          placeholder="Enter your name"
-          className="roundex-xl pl-4 w-full text-sm font-normal py-2 flex  outline-none border border-slate-200"
-        />
-        <p>Job Role</p>
-        <input
-          type="text"
-           value={formData.role}
-          onChange={(e)=>setFormData(data=>({...data,role:e.target.value}))}
-          placeholder="Enter job role"
-          className="roundex-xl pl-4 w-full text-sm font-normal py-2 flex  outline-none border border-slate-200"
-        />
-        <p>Requirements</p>
-        <input
-          type="text"
-           value={formData.requirements}
-          onChange={(e)=>setFormData(data=>({...data,requirements:e.target.value}))}
-          placeholder="Enter requirements"
-          className="roundex-xl pl-4 w-full text-sm font-normal py-2 flex  outline-none border border-slate-200"
-        />
-        <p>Resume</p>
-        <div onClick={FileSelectClick}  className=" w-full border-slate-600 rounded-xl border-dashed border gap-1 h-24 hover:bg-slate-100 flex flex-col items-center justify-center ">
-          <LuUpload size={25}/>
-          <samp className=" text-sm text-slate-600 font-normal">upload</samp>
-          {selectedFile &&
-            <span className=" text-sm text-slate-600 font-normal">{selectedFile.name}</span>}
+    <div className="w-full bg-black p-4 md:p-8 flex flex-col">
+      <h1 className="text-pink-600 text-4xl md:text-6xl font-bold text-center my-4">
+        Application Form
+      </h1>
+      <p className="text-gray-400 text-xl md:text-2xl font-semibold text-center mb-6">
+        Fill in all the required information to complete your application
+      </p>
+
+      <form
+        className="w-full max-w-7xl mx-auto bg-gray-900 text-white shadow-xl shadow-pink-400 rounded-xl p-4 md:p-8 flex flex-col gap-8"
+        onSubmit={handleFormSubmit}
+      >
+        <div className="flex flex-col md:flex-row justify-between gap-6">
+          {/* LEFT COLUMN */}
+          <div className="w-full md:w-1/2 flex flex-col gap-6">
+            {/* Organization Name */}
+            <div className="flex flex-col gap-2">
+              <label className="flex items-center gap-2">
+                <GoOrganization size={20} /> Organization name
+              </label>
+              <input
+                name="orgName"
+                value={formData.orgName}
+                onChange={handleChange}
+                type="text"
+                placeholder="Enter organization name"
+                className="bg-gray-800 outline-none pl-4 w-full rounded-lg py-3"
+              />
+            </div>
+
+            {/* Your Name */}
+            <div className="flex flex-col gap-2">
+              <label className="flex items-center gap-2">
+                <IoPersonOutline size={20} /> Your name
+              </label>
+              <input
+                name="yourName"
+                value={formData.yourName}
+                onChange={handleChange}
+                type="text"
+                placeholder="Enter your name"
+                className="bg-gray-800 outline-none pl-4 w-full rounded-lg py-3"
+              />
+            </div>
+
+            {/* Job Role */}
+            <div className="flex flex-col gap-2">
+              <label className="flex items-center gap-2">
+                <PiSuitcaseBold size={20} /> Job Role
+              </label>
+              <input
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                type="text"
+                placeholder="Enter job role"
+                className="bg-gray-800 outline-none pl-4 w-full rounded-lg py-3"
+              />
+            </div>
+
+            {/* Skills */}
+            <div className="flex flex-col gap-2">
+              <label className="flex items-center gap-2">
+                <MdOutlineListAlt size={20} /> Skills
+              </label>
+              <input
+                name="requirements"
+                value={formData.requirements}
+                onChange={handleChange}
+                type="text"
+                placeholder="Enter required skills"
+                className="bg-gray-800 outline-none pl-4 w-full rounded-lg py-3"
+              />
+            </div>
+
+            {/* Resume Upload */}
+            <div className="flex flex-col gap-2">
+              <label className="flex items-center gap-2">
+                <IoDocumentTextOutline size={20} /> Resume
+              </label>
+              <div
+                className="border border-dashed border-gray-500 w-full items-center justify-center p-4 rounded-xl hover:border-pink-600 flex flex-col cursor-pointer"
+                onClick={FileSelectClick}
+              >
+                <LuUpload size={30} className="hover:scale-110 transition-all mt-2 duration-500" />
+                <p className="hover:text-pink-500 transition-all duration-500">Upload</p>
+                <p className="text-gray-500 text-sm">PDF, DOC, or DOCX (max 10MB)</p>
+                {selectedFile && (
+                  <p className="text-green-400 mt-2 text-sm">{selectedFile.name}</p>
+                )}
+              </div>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileSelect}
+                className="hidden"
+                accept=".pdf,.doc,.docx"
+              />
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN */}
+          <div className="w-full md:w-1/2 flex flex-col gap-6">
+            {/* Job Description */}
+            <div className="flex flex-col gap-2">
+              <label className="flex items-center gap-2">
+                <PiSuitcaseBold size={20} /> Job Description
+              </label>
+              <textarea
+                name="jobDescription"
+                value={formData.jobDescription}
+                onChange={handleChange}
+                rows={9}
+                placeholder="Enter job description"
+                className="w-full outline-none p-4 bg-gray-800 rounded-xl"
+              />
+            </div>
+
+            {/* About Organization */}
+            <div className="flex flex-col gap-2">
+              <label className="flex items-center gap-2">
+                <GoOrganization size={20} /> About Organization
+              </label>
+              <textarea
+                name="aboutOrg"
+                value={formData.aboutOrg}
+                onChange={handleChange}
+                rows={9}
+                placeholder="Tell us about your organization"
+                className="w-full outline-none p-4 bg-gray-800 rounded-xl"
+              />
+            </div>
+          </div>
         </div>
-        <input ref={fileInputRef} onChange={handleFileSelect} type="file" className=" hidden" />
-        <button type="submit" className=" my-auto bg-blue-700 text-white rounded-xl py-3 hover:bg-blue-800 ">Submit</button>
-      </div>
-      <div  className="   p-4 w-full text-lg text-slate-700 font-semibold gap-6 flex flex-col">
-        <p>Job description</p>
-        <textarea value={formData.jobDescription}
-        placeholder="Enter Job description"
-        onChange={(e)=>setFormData(data=>({...data,jobDescription:e.target.value}))}
-        className=" text-sm font-normal p-4 w-full border-r-slate-400 border rounded-xl" rows={8}></textarea>
-        <p>About Organization</p>
-        <textarea
-        value={formData.aboutOrg}
-        placeholder="Enter about organization"
-        onChange={(e)=>setFormData(data=>({...data,aboutOrg:e.target.value}))}
-        className="  text-sm font-normal p-4 w-full border-r-slate-400 border rounded-xl" rows={8}></textarea>
-      </div>
-    </form>
+
+        <button
+          type="submit"
+          className="flex mx-auto mt-6 py-4 px-10 bg-pink-500 rounded-xl items-center gap-2 text-lg font-semibold hover:scale-110 transition duration-500"
+        >
+          <CiLocationArrow1 size={20} /> Submit
+        </button>
+      </form>
+    </div>
   );
 };
 

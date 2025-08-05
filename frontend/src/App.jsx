@@ -1,13 +1,12 @@
-import React from 'react'
-import Form from './components/Form'
+import React from 'react';
+import Form from './components/Form';
 
 const App = () => {
   return (
-    <>
-    <div className='flex w-full h-screen items-center justify-center bg-yellow-50'> <Form></Form></div>
-   
-    </>
-  )
-}
+    <div className="min-h-screen max-h-screen overflow-y-auto bg-black">
+      <Form />
+    </div>
+  );
+};
 
-export default App
+export default App;
