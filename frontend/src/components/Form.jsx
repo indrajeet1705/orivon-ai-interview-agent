@@ -54,13 +54,13 @@ const Form = () => {
       </p>
 
       <form
-        className="w-full max-w-7xl mx-auto bg-gray-900 text-white shadow-xl shadow-pink-400 rounded-xl p-4 md:p-8 flex flex-col gap-8"
+        className="w-full max-w-7xl mx-auto bg-gray-900 text-white shadow-md shadow-pink-400 rounded-xl p-4 md:p-8 flex flex-col gap-8"
         onSubmit={handleFormSubmit}
       >
         <div className="flex flex-col md:flex-row justify-between gap-6">
           {/* LEFT COLUMN */}
           <div className="w-full md:w-1/2 flex flex-col gap-6">
-            {/* Organization Name */}
+          
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2">
                 <GoOrganization size={20} /> Organization name
@@ -75,7 +75,6 @@ const Form = () => {
               />
             </div>
 
-            {/* Your Name */}
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2">
                 <IoPersonOutline size={20} /> Your name
@@ -90,7 +89,6 @@ const Form = () => {
               />
             </div>
 
-            {/* Job Role */}
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2">
                 <PiSuitcaseBold size={20} /> Job Role
@@ -105,7 +103,7 @@ const Form = () => {
               />
             </div>
 
-            {/* Skills */}
+          
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2">
                 <MdOutlineListAlt size={20} /> Skills
@@ -120,7 +118,6 @@ const Form = () => {
               />
             </div>
 
-            {/* Resume Upload */}
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2">
                 <IoDocumentTextOutline size={20} /> Resume
@@ -148,7 +145,7 @@ const Form = () => {
 
           {/* RIGHT COLUMN */}
           <div className="w-full md:w-1/2 flex flex-col gap-6">
-            {/* Job Description */}
+         
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2">
                 <PiSuitcaseBold size={20} /> Job Description
@@ -163,7 +160,6 @@ const Form = () => {
               />
             </div>
 
-            {/* About Organization */}
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2">
                 <GoOrganization size={20} /> About Organization
