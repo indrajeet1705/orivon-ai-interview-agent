@@ -2,13 +2,13 @@ from flask  import Flask, request, jsonify
 import os
 from pyresparser import ResumeParser
 from flask_cors import CORS
-
+from bson import ObjectId
 from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb+srv://indrajeet:orivonproject@ai-interview-agent.7mntq7o.mongodb.net/agentDB?retryWrites=true&w=majority&appName=ai-interview-agent"
 mongo = PyMongo(app)
-CORS(app)
+CORS(app,resources={r'/*':{'origins':'*'}})
 upload_folder = 'upload'
 os.makedirs(upload_folder, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = upload_folder
@@ -29,11 +29,24 @@ def createPost():
         return jsonify(all_job_post)
     elif request.method=="PATCH":
         resume=request.files.get('resume')
+        post_id=request.args.get('post_id')
         if resume.filename=='':
             return jsonify({"success":False,"messgae":"Choose File"})
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], resume.filename)
         resume.save(filepath)
         data=ResumeParser(filepath).get_extracted_data()
+        result= mongo.db.posts.find_one_and_update(
+        {"_id": ObjectId(post_id)},
+        {"$set": {"resume_data": data}},
+        return_document=True
+        )
+        if result:
+            result['_id'] = str(result['_id'])
+            return jsonify({"success": True, "message": "Resume added", "updated_post": result})
+        else:
+            return jsonify({"success": False, "message": "Post not found"})
+
+         
         
         
     else:
