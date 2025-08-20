@@ -1,0 +1,54 @@
+{
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "mobile_number": "9876543210",
+    "skills": [
+        "Mysql",
+        "Saas",
+        "Analytics",
+        "Ai",
+        "System",
+        "Django",
+        "Css",
+        "Github",
+        "Ux",
+        "Aws",
+        "Ui",
+        "Inventory",
+        "Agile",
+        "Apis",
+        "Communication",
+        "Flask",
+        "Html5",
+        "Technical",
+        "Docker",
+        "Rest",
+        "Scrum",
+        "Cloud",
+        "Javascript",
+        "Postgresql",
+        "Testing",
+        "Python",
+        "Email"
+    ],
+    "college_name": null,
+    "degree": [
+        "Bachelor of Technology in Computer Science"
+    ],
+    "designation": null,
+    "experience": [
+        "Senior Web Developer - Tech Solutions Pvt. Ltd. (2020 - Present) - Led a team of 5 developers to",
+        "build scalable SaaS platforms using React.js and Node.js. - Integrated AWS cloud services for",
+        "storage, authentication, and deployment. - Optimized application performance, reducing load time",
+        "by 35%. Web Developer - Creative Web Agency (2017 - 2020) - Developed responsive websites",
+        "and e-commerce platforms using MERN stack. - Implemented RESTful APIs for client-server",
+        "communication. - Collaborated with designers to create engaging UI/UX experiences.",
+        "Bachelor of Technology in Computer Science - XYZ University (2013 - 2017) - Graduated with",
+        "First Class Honors."
+    ],
+    "company_names": [
+        "Tech Solutions Pvt. Ltd."
+    ],
+    "no_of_pages": 1,
+    "total_experience": 0.0
+}

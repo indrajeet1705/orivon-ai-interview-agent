@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
-
-const Jobcard = ({role,experience,organization}) => {
-const [resume,setResume]=useState(null)
+import React, { useRef, useState } from "react"
+const Jobcard = ({id,role,experience,organization}) => {
+const [resume,setResume]=useState('')
+const [Applied,setApplied]=useState(false)
 
   const inputRef=useRef(null)
   const handleInput=(e)=>{
@@ -17,7 +17,21 @@ const [resume,setResume]=useState(null)
   }
   const handleFileSubmit= async(e)=>{
      if( resume){
-      const response= await axios.patch('http://127.0.0.1:5000/job-post',resume)
+      const formData= new FormData()
+      formData.append('resume',resume)
+      try {
+        
+        const response= await axios.patch(`http://127.0.0.1:5000/job-post?post_id=${id}`,formData,
+          {
+            headers:{'Content-Type':'multipart/form-data'}
+          }
+        )
+        if( response.data.success){
+          setApplied(true)
+        }
+      } catch (error) {
+        console.log(error.message)
+      }
        
      }
   }
@@ -40,9 +54,9 @@ const [resume,setResume]=useState(null)
       <p>experience : {experience}</p>
       <p>companey : {organization}</p>
     
-      <button onClick={handleInput} className="border py-2 hover:bg-slate-100">{ resume ?resume.name:"Select Resume"}</button>
-      <button onClick={handleFileSubmit} className="border py-2 hover:bg-slate-100" >Apply</button>
-      <input  onChange={handleFileChange} ref={inputRef} type="file" className="hidden "/>
+      <button onClick={handleInput} className={Applied ? 'hidden':"border py-2 hover:bg-slate-100"}>{ resume ?resume.name:"Select Resume"}</button>
+      <button onClick={handleFileSubmit} className="border py-2 hover:bg-slate-100" >{ Applied? 'Applied':'Apply'}</button>
+      <input  onChange={handleFileChange}  ref={inputRef} type="file" className="hidden "/>
     </div>
   );
 };
